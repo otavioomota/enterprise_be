@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
 import Company from '../infra/typeorm/entities/Company';
 import ICompaniesRepository from '../repositories/ICompaniesRepository';
 
@@ -19,7 +20,7 @@ class CreateCompanyService {
     const companyExists = await this.companiesRepository.findByCnpj(cnpj);
 
     if (companyExists) {
-      throw new Error('CNPJ already in use.');
+      throw new AppError('CNPJ already in use.');
     }
 
     const company = await this.companiesRepository.create({
