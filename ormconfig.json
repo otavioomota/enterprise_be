@@ -5,7 +5,7 @@
   "port": 5432,
   "username": "pbhub",
   "password": "pbhub",
-  "database": "solarma",
+  "database": "solarmar",
   "entities": [
     "./src/modules/**/infra/typeorm/entities/*.ts"
   ],

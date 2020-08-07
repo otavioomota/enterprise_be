@@ -7,6 +7,7 @@ interface IRequestDTO {
   name: string;
   email: string;
   cnpj: string;
+  address_id: string;
 }
 
 @injectable()
@@ -16,7 +17,12 @@ class CreateCompanyService {
     private companiesRepository: ICompaniesRepository,
   ) {}
 
-  public async execute({ name, email, cnpj }: IRequestDTO): Promise<Company> {
+  public async execute({
+    name,
+    email,
+    cnpj,
+    address_id,
+  }: IRequestDTO): Promise<Company> {
     const companyExists = await this.companiesRepository.findByCnpj(cnpj);
 
     if (companyExists) {
@@ -27,6 +33,7 @@ class CreateCompanyService {
       name,
       email,
       cnpj,
+      address_id,
     });
     return company;
   }
