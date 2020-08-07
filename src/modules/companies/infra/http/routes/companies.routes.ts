@@ -1,7 +1,11 @@
 import { Router } from 'express';
 
+import CompaniesController from '../controllers/CompaniesController';
+
 const routes = Router();
 
-routes.get('/', (request, response) => response.json({ ok: true }));
+const companiesController = new CompaniesController();
+routes.get('/', companiesController.index);
+routes.post('/', companiesController.store);
 
 export default routes;
