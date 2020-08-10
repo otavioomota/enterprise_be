@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import CreateCompanyService from '@modules/companies/services/CreateCompanyService';
-import ListAllCompaniesService from '@modules/companies/services/ListAllCompaniesService';
-
 import CreateAddressService from '@modules/addresses/services/CreateAddressService';
+import CreateCompanyService from '@modules/companies/services/CreateCompanyService';
+import CreateEmployeeService from '@modules/employees/services/CreateEmployeeService';
+import ListAllCompaniesService from '@modules/companies/services/ListAllCompaniesService';
 
 class CompaniesController {
   async index(request: Request, response: Response): Promise<Response> {
@@ -25,13 +25,14 @@ class CompaniesController {
       state,
       zip_code,
       name,
-      email,
       cnpj,
     } = request.body;
 
     const createAddress = container.resolve(CreateAddressService);
 
     const createCompany = container.resolve(CreateCompanyService);
+
+    const createEmployee = container.resolve(CreateEmployeeService);
 
     const address = await createAddress.execute({
       street,
@@ -45,12 +46,19 @@ class CompaniesController {
 
     const company = await createCompany.execute({
       name,
-      email,
       cnpj,
       address_id: address.id,
     });
 
-    return response.json(company);
+    const employee = await createEmployee.execute({
+      full_name: `Admin ${name}`,
+      email: `${name}exemplo.com`,
+      password: `${name}123`,
+      role: 'admin',
+      company_id: company.id,
+    });
+
+    return response.json(employee);
   }
 }
 

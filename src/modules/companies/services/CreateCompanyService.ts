@@ -5,7 +5,6 @@ import ICompaniesRepository from '../repositories/ICompaniesRepository';
 
 interface IRequestDTO {
   name: string;
-  email: string;
   cnpj: string;
   address_id: string;
 }
@@ -19,7 +18,6 @@ class CreateCompanyService {
 
   public async execute({
     name,
-    email,
     cnpj,
     address_id,
   }: IRequestDTO): Promise<Company> {
@@ -31,7 +29,6 @@ class CreateCompanyService {
 
     const company = await this.companiesRepository.create({
       name,
-      email,
       cnpj,
       address_id,
     });

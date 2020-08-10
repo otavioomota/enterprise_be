@@ -23,12 +23,9 @@ class Company {
   cnpj: string;
 
   @Column()
-  email: string;
-
-  @Column()
   address_id: string;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, { eager: true })
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
