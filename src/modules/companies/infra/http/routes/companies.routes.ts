@@ -2,10 +2,10 @@ import { Router } from 'express';
 
 import CompaniesController from '../controllers/CompaniesController';
 
-const routes = Router();
+const companiesRouter = Router();
 
 const companiesController = new CompaniesController();
-routes.get('/', companiesController.index);
-routes.post('/', companiesController.store);
+companiesRouter.get('/', companiesController.index);
+companiesRouter.post('/', companiesController.store);
 
-export default routes;
+export default companiesRouter;
