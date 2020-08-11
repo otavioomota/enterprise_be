@@ -3,9 +3,9 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "pbhub",
-  "password": "pbhub",
-  "database": "solarmar",
+  "username": "example",
+  "password": "example",
+  "database": "enterprise",
   "entities": [
     "./src/modules/**/infra/typeorm/entities/*.ts"
   ],
