@@ -1,4 +1,6 @@
 import 'reflect-metadata';
+import 'dotenv';
+
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
@@ -30,4 +32,4 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-app.listen(3333, () => console.log('Server is UP ...'));
+app.listen(process.env.APP_PORT, () => console.log('Server is UP ...'));

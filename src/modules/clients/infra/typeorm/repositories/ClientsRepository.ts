@@ -40,6 +40,12 @@ class ClientsRepository implements IClientsRepository {
 
     return client;
   }
+
+  public async findByEmail(email: string): Promise<Client | undefined> {
+    const client = await this.ormRepository.findOne({ where: { email } });
+
+    return client;
+  }
 }
 
 export default ClientsRepository;
