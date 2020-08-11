@@ -43,14 +43,14 @@ class Client {
   @Column()
   company_id: string;
 
-  @OneToOne(() => Company)
+  @OneToOne(() => Company, { eager: true })
   @JoinColumn({ name: 'company_id' })
   company: Company;
 
   @Column()
   address_id: string;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, { eager: true })
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
