@@ -46,6 +46,14 @@ class ClientsRepository implements IClientsRepository {
 
     return client;
   }
+
+  public async findAllByCompany(id: string): Promise<Client[]> {
+    const clients = await this.ormRepository.find({
+      where: { company_id: id },
+    });
+
+    return clients;
+  }
 }
 
 export default ClientsRepository;

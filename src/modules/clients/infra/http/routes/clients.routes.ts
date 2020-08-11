@@ -2,10 +2,12 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 import ClientsController from '../controllers/ClientsController';
+import ClientsByCompanyController from '../controllers/ClientsByCompanyController';
 
 const clientsRouter = Router();
 
 const clientsController = new ClientsController();
+const clientsByCompanyController = new ClientsByCompanyController();
 
 clientsRouter.post(
   '/',
@@ -30,6 +32,16 @@ clientsRouter.post(
     },
   }),
   clientsController.store,
+);
+
+clientsRouter.get(
+  '/companies/:companyId',
+  celebrate({
+    [Segments.PARAMS]: {
+      companyId: Joi.string().uuid().required(),
+    },
+  }),
+  clientsByCompanyController.index,
 );
 
 export default clientsRouter;
